@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@constants": ["./app/constants/CONSTANTS.js"],
+      "@url": ["./app/constants/URL.js"],
+      "@api": ["./app/constants/API.js"],
+      "@injectSaga": ["./app/utils/injectSaga.js"],
+      "@injectReducer": ["./app/utils/injectReducer.js"],
+      "@commons/*": ["./app/commons/*"],
+      "@containers/*": ["./app/containers/*"],
+      "Pages/*": ["./app/containers/Pages/*"],
+      "@assets/*": ["./app/assets/*"],
+      "@services/*": ["./app/services/*"],
+      "@components/*": ["./app/components/*"],
+      "@utils/*": ["./app/utils/*"],
+      "@reduxApp/*": ["./app/reduxApp/*"],
+      "@models/*": ["./app/models/*"],
+    }
+  }
+}
