@@ -13,10 +13,7 @@ export default {
   async signup(req, res) {
     try {
       const { value, error } = userService.validateSignup(req.body, 'POST');
-      if (error) {
-        console.log(error)
-        return res.status(400).json(error.details);
-      }
+      if (error) return responseAction.error(res, error, 400);
 
       let userInfo = await User.findOne({$or: [
         {email: value.email},
@@ -24,51 +21,47 @@ export default {
       ]})
       if (userInfo) {
         if (value.username === userInfo.username) {
-          return res.status(400).json({success: false, message: 'Tài khoản đã được đăng ký'})
+          return responseAction.error(res, { message: 'Tài khoản đã được đăng ký, vui lòng kiểm tra và thử lại' }, 400);
         }
         if (value.email === userInfo.email) {
-          return res.status(400).json({success: false, message: 'Email đã được đăng ký'})
-        }
+          return responseAction.error(res, { message: 'Email đã được đăng ký, vui lòng kiểm tra và thử lại' }, 400);        }
       }
       value.password = userService.encryptPassword(value.password)
       const user = await User.create(value);
-
-      if(value.email){
-        let mailOptions = {
-          from: `Hồ sơ sức khỏe <${config.mail.auth.user}>`, // sender address
-          to: value.email, // list of receivers
-          subject: 'Đăng ký tài khoản thành công', // Subject line
-          //text: 'Pass moi la 123455', // plaintext body
-          html: `<h2>Bạn đã được tạo thành công tài khoản tại hệ thống hồ sơ sức khỏe, Thông tin tài khoản</h2>
-              <div><strong>Họ tên: </strong>${value.full_name}</div>
-              <div><strong>Tên tài khoản: </strong>${value.username}</div>    
-              <div><strong>Số điện thoại: </strong>${value.phone}</div>
-              <div><strong>Email: </strong>${value.email}</div>
-              <div>Vui lòng đăng nhập tại <a href="${config.host_admin}">Link</a></div>`, // html body
-        };
-
-        sendEmail(mailOptions, (err) => {
-          if (err) {
-            console.log(err)
-            responseAction.error(res, 400);
-            return;
-          } else {
-
-          }
-        });
-      }
-      return res.json(user);
+      //
+      // if(value.email){
+      //   let mailOptions = {
+      //     from: `Hồ sơ sức khỏe <${config.mail.auth.user}>`, // sender address
+      //     to: value.email, // list of receivers
+      //     subject: 'Đăng ký tài khoản thành công', // Subject line
+      //     //text: 'Pass moi la 123455', // plaintext body
+      //     html: `<h2>Bạn đã được tạo thành công tài khoản tại hệ thống hồ sơ sức khỏe, Thông tin tài khoản</h2>
+      //         <div><strong>Họ tên: </strong>${value.full_name}</div>
+      //         <div><strong>Tên tài khoản: </strong>${value.username}</div>
+      //         <div><strong>Số điện thoại: </strong>${value.phone}</div>
+      //         <div><strong>Email: </strong>${value.email}</div>
+      //         <div>Vui lòng đăng nhập tại <a href="${config.host_admin}">Link</a></div>`, // html body
+      //   };
+      //
+      //   sendEmail(mailOptions, (err) => {
+      //     if (err) {
+      //       console.log(err)
+      //       responseAction.error(res, 400);
+      //       return;
+      //     } else {
+      //
+      //     }
+      //   });
+      // }
+      return responseAction.success(res, user);
     } catch (err) {
-      console.error(err);
-      return res.status(500).send(err);
+      return responseAction.error(res, err, 500);
     }
   },
   async login(req, res) {
     try {
       const { value, error } = userService.validateLogin(req.body);
-      if (error) {
-        return res.status(400).json(error);
-      }
+      if (error) return responseAction.error(res, error, 400);
 
       // Đầu tiên kiểm tra xem có phải tài khoản của giáo viên không.
       const user = await User.findOne({ username: value.username, is_deleted: false });
@@ -118,10 +111,9 @@ export default {
       if (!user) {
         responseAction.error(res, 404, '')
       }
-      return res.json(user);
+      return responseAction.success(res, user);
     } catch (err) {
-      console.error(err);
-      return res.status(500).send(err);
+      responseAction.error(res, err);
     }
   },
   async delete(req, res) {
@@ -132,10 +124,9 @@ export default {
         responseAction.error(res, 404, '')
       }
 
-      return res.json(user);
+      return responseAction.success(res, user);
     } catch (err) {
-      console.error(err);
-      return res.status(500).send(err);
+      responseAction.error(res, err);
     }
   },
   async update(req, res) {
@@ -164,37 +155,36 @@ export default {
 
       const user = await User.findOneAndUpdate({ _id: id }, value, { new: true });
       if (!user) {
-        responseAction.error(res, 404, '')
+        return responseAction.error(res, null, 404);
       }
 
-      if(user.email){
-        let mailOptions = {
-          from: `Hồ sơ sức khỏe <${config.mail.auth.user}>`, // sender address
-          to: value.email, // list of receivers
-          subject: 'Cập nhật thông tin tài khoản thành công', // Subject line
-          //text: 'Pass moi la 123455', // plaintext body
-          html: `<h2>Bạn đã được cập nhật tài khoản tại hệ thống hồ sơ sức khỏe, Thông tin tài khoản</h2>
-              <div><strong>Họ tên: </strong>${user.full_name}</div>
-              <div><strong>Tên tài khoản: </strong>${user.username}</div>             
-              <div><strong>Số điện thoại: </strong>${user.phone}</div>
-              <div><strong>Email: </strong>${user.email}</div>
-               <div>Vui lòng đăng nhập tại <a href="${config.host_admin}">Link</a></div>`, // html body
-        };
-        // console.log(mailOptions, 'mailOptions')
-        sendEmail(mailOptions, (err) => {
-          if (err) {
-            responseAction.error(res, 400);
-            return;
-          } else {
+      // if(user.email){
+      //   let mailOptions = {
+      //     from: `Hồ sơ sức khỏe <${config.mail.auth.user}>`, // sender address
+      //     to: value.email, // list of receivers
+      //     subject: 'Cập nhật thông tin tài khoản thành công', // Subject line
+      //     //text: 'Pass moi la 123455', // plaintext body
+      //     html: `<h2>Bạn đã được cập nhật tài khoản tại hệ thống hồ sơ sức khỏe, Thông tin tài khoản</h2>
+      //         <div><strong>Họ tên: </strong>${user.full_name}</div>
+      //         <div><strong>Tên tài khoản: </strong>${user.username}</div>
+      //         <div><strong>Số điện thoại: </strong>${user.phone}</div>
+      //         <div><strong>Email: </strong>${user.email}</div>
+      //          <div>Vui lòng đăng nhập tại <a href="${config.host_admin}">Link</a></div>`, // html body
+      //   };
+      //   // console.log(mailOptions, 'mailOptions')
+      //   sendEmail(mailOptions, (err) => {
+      //     if (err) {
+      //       responseAction.error(res, 400);
+      //       return;
+      //     } else {
+      //
+      //     }
+      //   });
+      // }
 
-          }
-        });
-      }
-
-      return res.json(user);
+      return responseAction.success(res, user);
     } catch (err) {
-      console.error(err);
-      return res.status(500).send(err);
+      return responseAction.error(res, err, 500);
     }
   },
 
@@ -330,7 +320,7 @@ export default {
       to: userUpdate.email, // list of receivers
       subject: 'Đổi mật khẩu thành công', // Subject line
       //text: 'Pass moi la 123455', // plaintext body
-      html: `<h2>Mật khẩu mới của bạn là <b style="color: red">${req.body.password}</b></h2>
+      html: `<h2>Mật khẩu mới của bạn là <b style="color: #ff0000">${req.body.password}</b></h2>
               </br>
               <div>Vui lòng đăng nhập tại <a href="${config.host_admin}">Link</a></div>` // html body
     };
