@@ -35,12 +35,12 @@ export async function update(req, res) {
 
     const { error, value } = Service.validate(req.body);
     if (error) return responseAction.error(res, error, 400);
-    const isUnique = await Model.findOne({ ma_khoa: value.ma_khoa, is_deleted: false, _id: { $ne: value._id } }, { _id: 1 });
+    const isUnique = await Model.findOne({ ma_lop_hoc: value.ma_lop_hoc, is_deleted: false, _id: { $ne: value._id } }, { _id: 1 });
     if (isUnique) {
-      return responseAction.error(res, { message: 'Mã khóa học đã tồn tại, vui lòng kiểm tra và thử lại' }, 400);
+      return responseAction.error(res, { message: 'Mã lớp học đã tồn tại, vui lòng kiểm tra và thử lại' }, 400);
     }
-    const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true })
-      .populate({path: 'ma_khoa', select:'ten_khoa'});
+    const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true });
+      // .populate({path: 'ma_khoa', select:'ten_khoa'});
     if (!data) {
       return responseAction.error(res, null, 404);
     }
@@ -55,14 +55,14 @@ export async function create(req, res) {
   try {
     const { error, value } = Service.validate(req.body);
     if (error) return responseAction.error(res, error, 400);
-    const isUnique = await Model.findOne({ ma_khoa: value.ma_khoa, is_deleted: false }, { _id: 1 });
+    const isUnique = await Model.findOne({ ma_lop_hoc: value.ma_lop_hoc, is_deleted: false }, { _id: 1 });
     if (isUnique) {
-      return responseAction.error(res, { message: 'Mã khóa học đã tồn tại, vui lòng kiểm tra và thử lại' }, 400);
+      return responseAction.error(res, { message: 'Mã lớp học đã tồn tại, vui lòng kiểm tra và thử lại' }, 400);
     }
     const data = await Model.create(value);
-    let dataRtn = await data
-      .populate({ path: 'ma_khoa', select: 'ten_khoa' }).execPopulate();
-    return responseAction.success(res, dataRtn);
+    // let dataRtn = await data
+    //   .populate({ path: 'ma_khoa', select: 'ten_khoa' }).execPopulate();
+    return responseAction.success(res, data);
     return responseAction.success(res, data);
   } catch (err) {
     return responseAction.error(res, err, 500);
@@ -71,11 +71,11 @@ export async function create(req, res) {
 
 export async function getAll(req, res) {
   try {
-    const query = queryHelper.extractQueryParam(req, ['ten_lop']);
+    const query = queryHelper.extractQueryParam(req, ['ten_lop_hoc']);
     const { criteria, options } = query;
-    options.populate = [
-      { path: 'ma_khoa', select: 'ten_khoa' },
-    ];
+    // options.populate = [
+    //   { path: 'ma_khoa', select: 'ten_khoa' },
+    // ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
   } catch (err) {

@@ -1,3 +1,4 @@
+export const USER = 'User'
 export const GIAOVIEN = 'GiaoVien'
 export const SINHVIEN = 'SinhVien'
 export const DETAI = 'DeTai'

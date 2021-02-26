@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { SINHVIEN } from '../../constant/dbCollections';
+import { LOPHOC, SINHVIEN } from '../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 const schema = new Schema({
@@ -9,8 +9,12 @@ const schema = new Schema({
   gioi_tinh: { type: String, required: true, validate: /\S+/ },
   sdt: { type: String, validate: /\S+/ },
   email: { type: String, required: true },
-  ma_lop: { type: String, required: true },
-  dia_chi: { type: String, required: true },
+  ma_lop_hoc: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: LOPHOC,
+    required: true,
+  },
+  dia_chi: { type: String },
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },
 }, {

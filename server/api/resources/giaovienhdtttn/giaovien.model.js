@@ -10,7 +10,7 @@ const schema = new Schema({
   sdt: { type: String, validate: /\S+/ },
   email: { type: String, required: true },
   hoc_vi: { type: String, required: true },
-  dia_chi: { type: String, required: true },
+  dia_chi: { type: String},
   ma_bo_mon: {
     type: mongoose.Schema.Types.ObjectId,
     ref: BOMON
