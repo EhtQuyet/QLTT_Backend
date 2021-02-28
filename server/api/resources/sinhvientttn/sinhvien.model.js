@@ -5,10 +5,10 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 const schema = new Schema({
   ten_sinh_vien: { type: String, required: true, validate: /\S+/ },
   ma_sinh_vien: { type: String, required: true, validate: /\S+/, unique: true },
-  ngay_sinh: { type: Date, required: true, validate: /\S+/ },
-  gioi_tinh: { type: String, required: true, validate: /\S+/ },
+  ngay_sinh: { type: Date, validate: /\S+/ },
+  gioi_tinh: { type: String, validate: /\S+/ },
   sdt: { type: String, validate: /\S+/ },
-  email: { type: String, required: true },
+  email: { type: String},
   ma_lop_hoc: {
     type: mongoose.Schema.Types.ObjectId,
     ref: LOPHOC,
