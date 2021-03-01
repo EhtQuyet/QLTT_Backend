@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import { LOPHOC, SINHVIEN } from '../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
+import { TRANG_THAI } from '../../constant/constant';
 
 const schema = new Schema({
   ten_sinh_vien: { type: String, required: true, validate: /\S+/ },
@@ -13,6 +14,11 @@ const schema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: LOPHOC,
     required: true,
+  },
+  trang_thai:{
+    type: String,
+    enum: Object.values(TRANG_THAI),
+    default: TRANG_THAI.CHUA_DANG_KY,
   },
   dia_chi: { type: String },
   isActive: { type: Boolean, default: true },
