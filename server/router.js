@@ -9,6 +9,8 @@ import {bomonRouter} from './api/resources/bomon/bomon.router';
 import {detaiRouter} from './api/resources/detaitttn/detai.router';
 import {diadiemthuctapRouter} from './api/resources/diadiemthuctap/diadiemthuctap.router'
 import {namhocRouter} from './api/resources/namhoc/namhoc.router'
+import {danhsachthuctapRouter} from './api/resources/thuctap/danhsachthuctap/danhsachthuctap.router'
+
 
 
 
@@ -23,6 +25,8 @@ router.use('/lophoc', lophocRouter);
 router.use('/detai', detaiRouter);
 router.use('/diadiemthuctap', diadiemthuctapRouter);
 router.use('/namhoc', namhocRouter);
+router.use('/danhsachthuctap', danhsachthuctapRouter);
+
 
 
 module.exports = router;
