@@ -35,7 +35,8 @@ export async function update(req, res) {
 
     const { error, value } = Service.validate(req.body);
     if (error) return responseAction.error(res, error, 400);
-    const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true });
+    const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true })
+      .populate({path: 'namhoc_id', select:'nam_hoc'});
     if (!data) {
       return responseAction.error(res, null, 404);
     }
@@ -51,7 +52,9 @@ export async function create(req, res) {
     const { error, value } = Service.validate(req.body);
     if (error) return responseAction.error(res, error, 400);
     const data = await Model.create(value);
-    return responseAction.success(res, data);
+    let dataRtn = await data
+      .populate({ path: 'namhoc_id', select: 'nam_hoc' }).execPopulate();
+    return responseAction.success(res, dataRtn);
   } catch (err) {
     return responseAction.error(res, err, 500);
   }
@@ -61,9 +64,9 @@ export async function getAll(req, res) {
   try {
     const query = queryHelper.extractQueryParam(req, ['ten_thuc_tap']);
     const { criteria, options } = query;
-    // options.populate = [
-    //   { path: 'id_don_vi', select: 'ten_don_vi' },
-    // ];
+    options.populate = [
+      { path: 'namhoc_id', select: 'nam_hoc' },
+    ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
   } catch (err) {
