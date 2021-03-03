@@ -8,6 +8,7 @@ export const LOPHOC = 'LopHoc'
 export const DIADIEMTHUCTAP = 'DiaDiemThucTap'
 export const NAMHOC = 'NamHoc'
 export const DANHSACHTHUCTAP = 'DanhSachThucTap'
+export const LOPTHUCTAP = 'LopThucTap'
 
 
 
