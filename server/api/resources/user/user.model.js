@@ -5,11 +5,11 @@ import {  USER } from '../../constant/dbCollections';
 const { Schema } = mongoose;
 const userSchema = new Schema({
     full_name: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String},
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    gender: { type: String , required: true},
-    phone: { type: String, required: true},
+    gender: { type: String},
+    phone: { type: String},
     is_deleted: { type: Boolean, default: false, select: false },
     active: { type: Boolean, default: true },
   },
