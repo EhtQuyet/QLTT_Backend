@@ -1,0 +1,7 @@
+export default {
+  ADMIN: "ADMIN",
+  BAN_CHU_NHIEM: "BAN_CHU_NHIEM",
+  GIAO_VU: "GIAO_VU",
+  GIANG_VIEN: "GIANG_VIEN",
+  SINH_VIEN: "SINH_VIEN",
+}

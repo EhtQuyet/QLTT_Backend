@@ -1,4 +1,5 @@
 export const USER = 'User'
+export const ROLE = 'Role'
 export const GIAOVIEN = 'GiaoVien'
 export const SINHVIEN = 'SinhVien'
 export const DETAI = 'DeTai'

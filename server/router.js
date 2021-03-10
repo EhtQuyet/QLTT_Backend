@@ -4,7 +4,7 @@ import userRouter from './api/resources/user/user.router';
 import {giaovienRouter} from './api/resources/giaovienhdtttn/giaovien.router';
 import {sinhvienRouter} from './api/resources/sinhvientttn/sinhvien.router';
 import {lophocRouter} from './api/resources/lophoc/lop.router';
-// import {khoahocRouter} from './api/resources/khoahoc/khoahoc.router';
+import roleRouter from './api/resources/role/role.router';
 import {bomonRouter} from './api/resources/bomon/bomon.router';
 import {detaiRouter} from './api/resources/detaitttn/detai.router';
 import {diadiemthuctapRouter} from './api/resources/diadiemthuctap/diadiemthuctap.router'
@@ -17,6 +17,7 @@ import {danhsachthuctapRouter} from './api/resources/thuctap/danhsachthuctap/dan
 const router = express.Router();
 
 router.use('/users', userRouter);
+router.use('/roles', roleRouter);
 router.use('/giaovien', giaovienRouter);
 router.use('/sinhvien', sinhvienRouter);
 router.use('/bomon', bomonRouter);
