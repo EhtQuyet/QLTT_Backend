@@ -14,11 +14,11 @@ const schema = new Schema({
     required: true
   },
   ghi_chu: { type: String, required: false},
-  sinhvien_hoccung_id:{
+  sinhvien_hoccung_id:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: SINHVIEN,
     required: true
-  },
+  }],
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },
 }, {
