@@ -47,6 +47,7 @@
     "ahooks": "^2.9.1",
     "antd": "^4.8.5",
     "axios": "^0.21.0",
+    "bcrypt": "^5.0.1",
     "bcryptjs": "2.4.3",
     "chalk": "2.4.2",
     "classnames": "^2.2.6",

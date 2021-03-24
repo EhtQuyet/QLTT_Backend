@@ -11,6 +11,7 @@ const config = getConfig(process.env.NODE_ENV);
 
 export default {
   async signup(req, res) {
+    console.log(req.body);
     try {
       const { value, error } = userService.validateSignup(req.body, 'POST');
       if (error) return responseAction.error(res, error, 400);

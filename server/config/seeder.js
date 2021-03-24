@@ -1,8 +1,30 @@
 import Role from '../api/resources/role/role.model';
+import User from '../api/resources/user/user.model';
 import roles from '../api/constant/roleConstant';
+import users from '../api/constant/userConstant';
 
 
 async function initData() {
+
+  async function initUser() {
+    const countUser = await Role.countDocuments({code: {$in: [users.ADMIN]}})
+    if (countUser) return
+    const admin = {
+      is_deleted : false,
+      active : true,
+      email : "admin@gmail.com",
+      full_name : "Admin",
+      password: '$2b$10$qkc.aj0vvSAMJQMpYJ/bHODpLX8mYDLU2ZzmPLo8TYUQImJdDG..W',
+      gender : "Nam",
+      phone : "1234567890",
+      role : ["ADMIN"],
+      username : "admin",
+    }
+    await User.create([admin])
+  }
+
+  await initUser();
+
 
   async function initRoles() {
     const countRole = await Role.countDocuments({code: {$in: [roles.ADMIN, roles.BAN_CHU_NHIEM, roles.GIANG_VIEN, roles.GIAO_VU, roles.SINH_VIEN]}})
