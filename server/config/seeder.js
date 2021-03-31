@@ -23,7 +23,7 @@ async function initData() {
     await User.create([admin])
   }
 
-  await initUser();
+  // await initUser();
 
 
   async function initRoles() {
