@@ -7,6 +7,9 @@ sinhvienRouter  .route('/')
   .get(passport.authenticate('jwt', { session: false }), controller.getAll)
   .post(passport.authenticate('jwt', { session: false }), controller.create)
 
+sinhvienRouter  .route('/import')
+  .post(passport.authenticate('jwt', { session: false }), controller.importSinhVien)
+
 sinhvienRouter
   .route('/:id')
   .get(passport.authenticate('jwt', { session: false }), controller.findOne)
