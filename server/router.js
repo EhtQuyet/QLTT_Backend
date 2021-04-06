@@ -9,8 +9,7 @@ import {bomonRouter} from './api/resources/bomon/bomon.router';
 import {detaiRouter} from './api/resources/detaitttn/detai.router';
 import {diadiemthuctapRouter} from './api/resources/diadiemthuctap/diadiemthuctap.router'
 import {namhocRouter} from './api/resources/namhoc/namhoc.router'
-import {danhsachthuctapRouter} from './api/resources/thuctap/danhsachthuctap/danhsachthuctap.router'
-import {lopthuctapRouter} from './api/resources/thuctap/lopthuctap/lopthuctap.router'
+import {dotthuctapRouter} from './api/resources/thuctap/dotthuctap/dotthuctap.router'
 import {dkthuctapRouter} from './api/resources/dangkythuctap/dkthuctap.router'
 
 
@@ -28,8 +27,7 @@ router.use('/lophoc', lophocRouter);
 router.use('/detai', detaiRouter);
 router.use('/diadiemthuctap', diadiemthuctapRouter);
 router.use('/namhoc', namhocRouter);
-router.use('/danhsachthuctap', danhsachthuctapRouter);
-router.use('/lopthuctap', lopthuctapRouter);
+router.use('/dotthuctap', dotthuctapRouter);
 router.use('/dangkythuctap', dkthuctapRouter);
 
 

@@ -9,7 +9,7 @@ export const LOPHOC = 'LopHoc'
 export const DIADIEMTHUCTAP = 'DiaDiemThucTap'
 export const NAMHOC = 'NamHoc'
 export const DANHSACHTHUCTAP = 'DanhSachThucTap'
-export const LOPTHUCTAP = 'LopThucTap'
+export const DOTTHUCTAP = 'DotThucTap'
 export const DANGKYTHUCTAP = 'DangKyThucTap'
 
 

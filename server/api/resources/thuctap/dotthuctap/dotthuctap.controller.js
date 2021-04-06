@@ -1,7 +1,7 @@
 import * as responseAction from '../../../utils/responseAction';
 import queryHelper from '../../../helpers/queryHelper';
-import * as Service from './danhsachthuctap.service';
-import Model from './danhsachthuctap.model';
+import * as Service from './dotthuctap.service';
+import Model from './dotthuctap.model';
 
 export async function findOne(req, res) {
   try {
@@ -36,7 +36,7 @@ export async function update(req, res) {
     const { error, value } = Service.validate(req.body);
     if (error) return responseAction.error(res, error, 400);
     const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true })
-      .populate({path: 'namhoc_id', select:'nam_hoc'});
+      .populate({path: 'namhoc', select:'nam_hoc'});
     if (!data) {
       return responseAction.error(res, null, 404);
     }
@@ -53,7 +53,7 @@ export async function create(req, res) {
     if (error) return responseAction.error(res, error, 400);
     const data = await Model.create(value);
     let dataRtn = await data
-      .populate({ path: 'namhoc_id', select: 'nam_hoc' }).execPopulate();
+      .populate({ path: 'namhoc', select: 'nam_hoc' }).execPopulate();
     return responseAction.success(res, dataRtn);
   } catch (err) {
     return responseAction.error(res, err, 500);
@@ -62,10 +62,10 @@ export async function create(req, res) {
 
 export async function getAll(req, res) {
   try {
-    const query = queryHelper.extractQueryParam(req, ['ten_thuc_tap']);
+    const query = queryHelper.extractQueryParam(req, ['nam_hoc']);
     const { criteria, options } = query;
     options.populate = [
-      { path: 'namhoc_id', select: 'nam_hoc' },
+      { path: 'namhoc', select: 'nam_hoc' },
     ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
