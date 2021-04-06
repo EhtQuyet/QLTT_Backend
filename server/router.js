@@ -23,7 +23,6 @@ router.use('/roles', roleRouter);
 router.use('/giaovien', giaovienRouter);
 router.use('/sinhvien', sinhvienRouter);
 router.use('/bomon', bomonRouter);
-// router.use('/khoahoc', khoahocRouter);
 router.use('/lophoc', lophocRouter);
 router.use('/detai', detaiRouter);
 router.use('/diadiemthuctap', diadiemthuctapRouter);
