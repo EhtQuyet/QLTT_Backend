@@ -11,6 +11,7 @@ export async function  getAll(req, res) {
     options.populate = [
       { path: 'sinh_vien', select: 'full_name username' },
       { path: 'dia_diem_thuc_tap', select: 'dia_chi ten_dia_diem' },
+      { path: 'dot_thuc_tap', select: 'ten_dot' },
       { path: 'giao_vien_huong_dan', select: 'ma_giao_vien ten_giao_vien' },
     ];
     const data = await Model.paginate(criteria, options);
@@ -28,6 +29,7 @@ export async function create(req, res) {
     let dataRtn = await data
       .populate({path: 'sinh_vien', select: 'full_name username'})
       .populate({path: 'dia_diem_thuc_tap', select: 'dia_chi ten_dia_diem'})
+      .populate({path: 'dot_thuc_tap', select: 'ten_dot'})
       .populate({path: 'giao_vien_huong_dan', select: 'ma_giao_vien ten_giao_vien'}).execPopulate();
     return responseAction.success(res, dataRtn);
   } catch (err) {
@@ -68,6 +70,7 @@ export async function update(req, res) {
     const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true })
       .populate({path: 'sinh_vien', select: 'full_name username'})
       .populate({path: 'dia_diem_thuc_tap', select: 'dia_chi ten_dia_diem'})
+      .populate({path: 'dot_thuc_tap', select: 'ten_dot'})
       .populate({path: 'giao_vien_huong_dan', select: 'ma_giao_vien ten_giao_vien'});
     if (!data) {
       return responseAction.error(res, null, 404);

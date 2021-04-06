@@ -11,6 +11,7 @@ const schema = new Schema({
   thoigian_ketthuc: { type: Date },
   ten_dot: { type: String, required: true, },
   ghi_chu: { type: String },
+  trang_thai : {type: Boolean, default: false},
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },
 }, {
