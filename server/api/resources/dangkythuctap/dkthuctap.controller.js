@@ -35,10 +35,23 @@ export async function create(req, res) {
   }
 }
 
-export async function findOne(req, res) {
+export async function findById(req, res) {
   try {
     const { id } = req.params;
     const data = await Model.findById(id);
+    if (!data) {
+      return responseAction.error(res, 404, '');
+    }
+    return responseAction.success(res, data);
+  } catch (err) {
+    responseAction.error(res, err);
+  }
+}
+
+export async function findOne(req, res) {
+  try {
+    const { id } = req.params;
+    const data = await Model.findOne({sinh_vien: id, is_deleted: false})
     if (!data) {
       return responseAction.error(res, 404, '');
     }

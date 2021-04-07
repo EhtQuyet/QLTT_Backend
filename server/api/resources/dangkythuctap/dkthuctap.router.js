@@ -9,6 +9,9 @@ dkthuctapRouter.route('/')
 
 dkthuctapRouter
   .route('/:id')
-  .get(passport.authenticate('jwt', { session: false }), controller.findOne)
+  .get(passport.authenticate('jwt', { session: false }), controller.findById)
   .delete(passport.authenticate('jwt', { session: false }), controller.remove)
   .put(passport.authenticate('jwt', { session: false }), controller.update);
+dkthuctapRouter
+  .route('/sv/:id')
+  .get(passport.authenticate('jwt', { session: false }), controller.findOne)
