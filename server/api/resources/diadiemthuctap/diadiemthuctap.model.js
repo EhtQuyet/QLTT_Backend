@@ -9,6 +9,7 @@ const schema = new Schema({
   dien_thoai: { type: String, required: false, validate: /\S+/},
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },
+  isConfirm: { type: Boolean, default: false },
 }, {
   versionKey: false,
 });
