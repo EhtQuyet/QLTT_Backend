@@ -42,7 +42,7 @@ export async function findById(req, res) {
     const { id } = req.params;
     const data = await Model.findById(id);
     if (!data) {
-      return responseAction.error(res, 404, '');
+      return responseAction.error(res, err, 404);
     }
     return responseAction.success(res, data);
   } catch (err) {
@@ -55,7 +55,7 @@ export async function findOne(req, res) {
     const { id } = req.params;
     const data = await Model.findOne({sinh_vien: id, is_deleted: false})
     if (!data) {
-      return responseAction.error(res, 404, '');
+      return responseAction.error(res, err, 400);
     }
     return responseAction.success(res, data);
   } catch (err) {
@@ -68,7 +68,7 @@ export async function remove(req, res) {
     const { id } = req.params;
     const data = await Model.findOneAndUpdate({ _id: id }, { is_deleted: true }, { new: true });
     if (!data) {
-      return responseAction.error(res, 404, '');
+      return responseAction.error(res, err, 400);
     }
     return responseAction.success(res, data);
   } catch (err) {
