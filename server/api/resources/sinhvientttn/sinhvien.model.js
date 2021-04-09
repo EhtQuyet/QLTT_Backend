@@ -15,11 +15,11 @@ const schema = new Schema({
     ref: LOPHOC,
     required: true,
   },
-  trang_thai:{
-    type: String,
-    enum: Object.values(TRANG_THAI),
-    default: TRANG_THAI.CHUA_DANG_KY,
-  },
+  // trang_thai:{
+  //   type: String,
+  //   enum: Object.values(TRANG_THAI),
+  //   default: TRANG_THAI.CHUA_DANG_KY,
+  // },
   dia_chi: { type: String },
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },

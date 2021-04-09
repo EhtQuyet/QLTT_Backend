@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import { GIAOVIEN, DETAI, USER, BOMON } from '../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import { TRANG_THAI } from '../../constant/constant';
+import { DT_TRANG_THAI } from '../../constant/constant';
 
 const schema = new Schema({
   ten_de_tai: { type: String, required: true, validate: /\S+/ },
@@ -9,13 +9,13 @@ const schema = new Schema({
   ngay_tao: { type: Date, required: true },
   trang_thai: {
     type: String,
-    enum: Object.values(TRANG_THAI),
-    default: TRANG_THAI.CHUA_DUOC_DUYET,
+    enum: Object.values(DT_TRANG_THAI),
+    default: DT_TRANG_THAI.CHUA_DUOC_DUYET,
   },
   trang_thai_dang_ky: {
     type: String,
-    enum: Object.values(TRANG_THAI),
-    default: TRANG_THAI.CHUA_DANG_KY,
+    enum: Object.values(DT_TRANG_THAI),
+    default: DT_TRANG_THAI.CHUA_DANG_KY,
   },
   ma_giao_vien: {
     type: mongoose.Schema.Types.ObjectId,
