@@ -11,6 +11,7 @@ import {diadiemthuctapRouter} from './api/resources/diadiemthuctap/diadiemthucta
 import {namhocRouter} from './api/resources/namhoc/namhoc.router'
 import {dotthuctapRouter} from './api/resources/thuctap/dotthuctap/dotthuctap.router'
 import {dkthuctapRouter} from './api/resources/dangkythuctap/dkthuctap.router'
+import {thongbaoRouter} from './api/resources/thongbao/thongbao.router'
 
 
 
@@ -28,6 +29,7 @@ router.use('/diadiemthuctap', diadiemthuctapRouter);
 router.use('/namhoc', namhocRouter);
 router.use('/dotthuctap', dotthuctapRouter);
 router.use('/dangkythuctap', dkthuctapRouter);
+router.use('/thongbao', thongbaoRouter);
 
 
 
