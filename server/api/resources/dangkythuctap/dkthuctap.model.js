@@ -1,10 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
-import { DANGKYTHUCTAP, DIADIEMTHUCTAP, GIAOVIEN, USER, DOTTHUCTAP } from '../../constant/dbCollections';
+import { DANGKYTHUCTAP, DIADIEMTHUCTAP, GIAOVIEN, SINHVIEN, DOTTHUCTAP } from '../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
 import { DKTT_TRANG_THAI } from '../../constant/constant';
 
 const schema = new Schema({
-  sinh_vien: { type: mongoose.Schema.Types.ObjectId, required: true, ref: USER},
+  sinh_vien: { type: mongoose.Schema.Types.ObjectId, required: true, ref: SINHVIEN},
   dot_thuc_tap: { type: mongoose.Schema.Types.ObjectId, required: true, ref: DOTTHUCTAP},
   dia_diem_thuc_tap: {type: mongoose.Schema.Types.ObjectId, required: true, ref: DIADIEMTHUCTAP},
   giao_vien_huong_dan: {type: mongoose.Schema.Types.ObjectId, required: true, ref: GIAOVIEN},

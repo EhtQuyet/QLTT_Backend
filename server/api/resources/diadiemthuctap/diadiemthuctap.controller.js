@@ -49,6 +49,7 @@ export async function create(req, res) {
 
   try {
     const { error, value } = Service.validate(req.body);
+    console.log('value', value);
     if (error) return responseAction.error(res, error, 400);
     const data = await Model.create(value);
     return responseAction.success(res, data);

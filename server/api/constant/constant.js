@@ -22,4 +22,8 @@ export const DKTT_TRANG_THAI = {
   DA_XAC_NHAN: 'DA_XAC_NHAN',
   DA_CHIA_NHOM: 'DA_CHIA_NHOM'
 };
+export const DDTT = {
+  DA_XAC_NHAN: 'DA_XAC_NHAN',
+  CHUA_XAC_NHAN: 'CHUA_XAC_NHAN'
+};
 
