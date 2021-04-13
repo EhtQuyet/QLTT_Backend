@@ -22,6 +22,8 @@ export const DKTT_TRANG_THAI = {
   // trạng thái đăng ký thực tập
   DA_DANG_KY: 'DA_DANG_KY',
   DU_DIEU_KIEN: 'DU_DIEU_KIEN',
+  KHONG_DU_DIEU_KIEN: 'KHONG_DU_DIEU_KIEN',
+  CHON_GIANG_VIEN: 'CHON_GIANG_VIEN',
   GV_XAC_NHAN: 'GV_XAC_NHAN',
   DA_CHIA_NHOM: 'DA_CHIA_NHOM'
 };
