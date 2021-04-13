@@ -8,6 +8,10 @@ const schema = new Schema({
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },
 }, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+  },
   versionKey: false,
 });
 

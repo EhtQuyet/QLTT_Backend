@@ -15,6 +15,10 @@ const schema = new Schema({
     enum: Object.values(DDTT),
     default: DDTT.DANG_MO},
 }, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+  },
   versionKey: false,
 });
 
