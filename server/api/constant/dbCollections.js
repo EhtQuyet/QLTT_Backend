@@ -12,6 +12,8 @@ export const NAMHOC = 'NamHoc'
 export const DANHSACHTHUCTAP = 'DanhSachThucTap'
 export const DOTTHUCTAP = 'DotThucTap'
 export const DANGKYTHUCTAP = 'DangKyThucTap'
+export const NHOMTHUCTAP = 'NhomThucTap'
+export const CHITIET_NHOMTHUCTAP = 'ChiTietNhomThucTap'
 
 
 
