@@ -57,12 +57,8 @@ export async function findById(req, res) {
 export async function findOne(req, res) {
   try {
     const { id } = req.params;
-    console.log('id', id);
     const sinhVien = await SinhVienModel.find({ ma_sinh_vien: id, is_deleted: false });
-    console.log('sinhVien', sinhVien);
-    console.log('sinhVien', sinhVien[0]._id);
     const data = await Model.find({ sinh_vien: sinhVien[0]._id, is_delete: false });
-    console.log('data', data);
     return responseAction.success(res, data);
   } catch (err) {
     responseAction.error(res, err);
