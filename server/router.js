@@ -13,7 +13,8 @@ import {dotthuctapRouter} from './api/resources/thuctap/dotthuctap/dotthuctap.ro
 import {dkthuctapRouter} from './api/resources/thuctap/dangkythuctap/dkthuctap.router'
 import {thongbaoRouter} from './api/resources/thongbao/thongbao.router'
 
-
+import { router as nhomTTRouter } from './api/resources/thuctap/nhomthuctap/router';
+import { router as chitietNhomTTRouter } from './api/resources/thuctap/nhomthuctap/chitiet/router';
 
 
 const router = express.Router();
@@ -30,6 +31,10 @@ router.use('/namhoc', namhocRouter);
 router.use('/dotthuctap', dotthuctapRouter);
 router.use('/dangkythuctap', dkthuctapRouter);
 router.use('/thongbao', thongbaoRouter);
+
+router.use('/nhomthuctap', nhomTTRouter);
+router.use('/nhomthuctapchitiet', chitietNhomTTRouter);
+
 
 
 

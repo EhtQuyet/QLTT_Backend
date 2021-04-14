@@ -6,23 +6,22 @@ import * as Service from './dkthuctap.service';
 
 
 export async function getAll(req, res) {
+
   try {
-    const query = queryHelper.extractQueryParam(req);
-    let { criteria, options } = query;
-    options = {
-      populate: [
-        { path: 'sinh_vien', select: 'ten_sinh_vien ma_sinh_vien' },
-        { path: 'dia_diem_thuc_tap', select: 'dia_chi ten_dia_diem' },
-        { path: 'dot_thuc_tap', select: 'ten_dot' },
-        { path: 'giao_vien_huong_dan', select: 'ma_giao_vien ten_giao_vien' },
-      ],
-      sort: { created_at: -1 },
-    };
+    const query = queryHelper.extractQueryParam(req, ['ten_lop_hoc']);
+    const { criteria, options } = query;
+    options.populate = [
+      { path: 'sinh_vien', select: 'ten_sinh_vien ma_sinh_vien' },
+      { path: 'dia_diem_thuc_tap', select: 'dia_chi ten_dia_diem' },
+      { path: 'dot_thuc_tap', select: 'ten_dot' },
+      { path: 'giao_vien_huong_dan', select: 'ma_giao_vien ten_giao_vien' },
+    ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
   } catch (err) {
     responseAction.error(res, err);
   }
+
 }
 
 export async function create(req, res) {

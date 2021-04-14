@@ -1,9 +1,14 @@
 import mongoose, { Schema } from 'mongoose';
-import { DIADIEMTHUCTAP, DOTTHUCTAP, GIAOVIEN, NHOMTHUCTAP } from '../../../constant/dbCollections';
+import { DIADIEMTHUCTAP, DOTTHUCTAP, GIAOVIEN, NAMHOC, NHOMTHUCTAP, SINHVIEN } from '../../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
 import { TRANG_THAI } from '../../../constant/constant';
 
 const schema = new Schema({
+  nam_hoc: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: NAMHOC,
+  },
   id_dotthuctap: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -18,6 +23,11 @@ const schema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: DIADIEMTHUCTAP,
+  },
+  id_nhomtruong: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: SINHVIEN,
   },
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },
