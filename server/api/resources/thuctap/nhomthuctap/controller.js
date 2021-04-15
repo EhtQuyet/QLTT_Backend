@@ -10,12 +10,16 @@ export async function findOne(req, res) {
     const { id } = req.params;
     const data = await Model.findOne({ _id: id, is_deleted: false })
       .populate({ path: 'id_dotthuctap', select: 'ten_dot' })
+      .populate({ path: 'nam_hoc', select: 'nam_hoc' })
+      .populate({ path: 'dia_diem', select: 'ten_dia_diem' })
+      .populate({ path: 'id_nhomtruong', select: 'ten_sinh_vien' })
+      .populate({ path: 'id_giangvien', select: 'ten_giao_vien' })
       .lean();
     if (!data) {
       return responseAction.error(res, CommonError.NOT_FOUND());
     }
     data.chitiet = await ChiTietNhomThucTapService.getAll({ id_nhomthuctap: data._id, is_deleted: false })
-      .populate({ path: 'id_sinhvien'}).lean();
+      .populate({ path: 'id_sinhvien' }).lean();
     responseAction.success(res, data);
   } catch (err) {
     responseAction.error(res, err);
@@ -89,6 +93,8 @@ export async function getAll(req, res) {
       { path: 'id_dotthuctap', select: 'ten_dot' },
       { path: 'id_giangvien', select: 'ten_giao_vien' },
       { path: 'dia_diem', select: 'ten_dia_diem' },
+      { path: 'nam_hoc', select: 'nam_hoc' },
+      { path: 'id_nhomtruong', select: 'ten_sinh_vien' },
     ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);

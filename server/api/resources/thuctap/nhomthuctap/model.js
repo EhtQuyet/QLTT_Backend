@@ -1,5 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
-import { DIADIEMTHUCTAP, DOTTHUCTAP, GIAOVIEN, NAMHOC, NHOMTHUCTAP, SINHVIEN } from '../../../constant/dbCollections';
+import {
+  DANGKYTHUCTAP,
+  DIADIEMTHUCTAP,
+  DOTTHUCTAP,
+  GIAOVIEN,
+  NAMHOC,
+  NHOMTHUCTAP,
+  SINHVIEN,
+} from '../../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
 import { TRANG_THAI } from '../../../constant/constant';
 

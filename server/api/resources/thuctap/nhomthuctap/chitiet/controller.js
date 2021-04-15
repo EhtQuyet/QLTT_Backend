@@ -36,7 +36,8 @@ export async function update(req, res) {
     const { error, value } = Service.validate(req.body);
     if (error) return responseAction.error(res, error, 400);
 
-    const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true });
+    const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true })
+      .populate({ path: 'id_sinhvien', select: 'ten_sinh_vien ma_sinh_vien' });
     if (!data) {
       return responseAction.error(res, null, 404);
     }
@@ -52,7 +53,9 @@ export async function create(req, res) {
     const { error, value } = Service.validate(req.body);
     if (error) return responseAction.error(res, error, 400);
     const data = await Model.create(value);
-    return res.json(data);
+    let dataRtn = await data
+      .populate({ path: 'id_sinhvien', select: 'ten_sinh_vien ma_sinh_vien' }).execPopulate();
+    return responseAction.success(res, dataRtn);
   } catch (err) {
     console.error(err);
     return responseAction.error(res, err, 500);
@@ -62,7 +65,7 @@ export async function create(req, res) {
 export async function getAll(req, res) {
   try {
     const query = queryHelper.extractQueryParam(req);
-    const {criteria, options} = query
+    const { criteria, options } = query;
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
   } catch (err) {
