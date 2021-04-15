@@ -15,7 +15,17 @@ export async function getAll(req, res) {
       { path: 'dia_diem_thuc_tap', select: 'dia_chi ten_dia_diem' },
       { path: 'dot_thuc_tap', select: 'ten_dot' },
       { path: 'giao_vien_huong_dan', select: 'ma_giao_vien ten_giao_vien' },
-    ];
+    ]
+    options.sort = {create_at: 1}
+    // options = {
+    //   populate :[
+    //     { path: 'sinh_vien', select: 'ten_sinh_vien ma_sinh_vien' },
+    //     { path: 'dia_diem_thuc_tap', select: 'dia_chi ten_dia_diem' },
+    //     { path: 'dot_thuc_tap', select: 'ten_dot' },
+    //     { path: 'giao_vien_huong_dan', select: 'ma_giao_vien ten_giao_vien' },
+    //   ],
+    //   sort: {created_at: -1}
+    // }
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
   } catch (err) {

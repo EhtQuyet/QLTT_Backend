@@ -33,7 +33,8 @@ export const DKTT_TRANG_THAI = {
 
 export const DDTT = {
   DA_XAC_NHAN: 'DA_XAC_NHAN',
-  CHUA_XAC_NHAN: 'CHUA_XAC_NHAN'
+  CHUA_XAC_NHAN: 'CHUA_XAC_NHAN',
+  TU_CHOI: 'TU_CHOI'
 };
 
 export const THONG_BAO = {
