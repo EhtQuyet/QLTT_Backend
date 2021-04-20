@@ -6,7 +6,9 @@ import Model from './model';
 export async function findOne(req, res) {
   try {
     const { id } = req.params;
-    const data = await Model.findById(id);
+    const data = await Model.findById(id)
+      .populate({ path: 'id_sinhvien', select: 'ten_sinh_vien' })
+      .lean();
     if (!data) {
       return responseAction.error(res, 404, '');
     }
@@ -66,7 +68,11 @@ export async function getAll(req, res) {
   try {
     const query = queryHelper.extractQueryParam(req);
     const { criteria, options } = query;
+    options.populate = [
+      { path: 'id_sinhvien', select: 'ten_sinh_vien ma_sinh_vien' },
+    ];
     const data = await Model.paginate(criteria, options);
+
     responseAction.success(res, data);
   } catch (err) {
     responseAction.error(res, err);

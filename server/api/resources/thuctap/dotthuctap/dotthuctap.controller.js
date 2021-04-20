@@ -63,11 +63,11 @@ export async function create(req, res) {
 export async function getAll(req, res) {
 
   try {
-    const query = queryHelper.extractQueryParam(req, ['ten_lop_hoc']);
+    const query = queryHelper.extractQueryParam(req);
     const { criteria, options } = query;
-    options.populate = [
-      { path: 'namhoc', select: 'nam_hoc' }
-    ];
+    // options.populate = [
+    //   { path: 'namhoc', select: 'nam_hoc' }
+    // ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
   } catch (err) {
