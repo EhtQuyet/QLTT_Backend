@@ -32,11 +32,6 @@ const schema = new Schema({
     required: true,
     ref: DIADIEMTHUCTAP,
   },
-  id_nhomtruong: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: SINHVIEN,
-  },
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },
 }, {

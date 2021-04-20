@@ -12,7 +12,6 @@ export async function findOne(req, res) {
       .populate({ path: 'id_dotthuctap', select: 'ten_dot' })
       .populate({ path: 'nam_hoc', select: 'nam_hoc' })
       .populate({ path: 'dia_diem', select: 'ten_dia_diem' })
-      .populate({ path: 'id_nhomtruong', select: 'ten_sinh_vien' })
       .populate({ path: 'id_giangvien', select: 'ten_giao_vien' })
       .lean();
     if (!data) {
@@ -94,7 +93,6 @@ export async function getAll(req, res) {
       { path: 'id_giangvien', select: 'ten_giao_vien' },
       { path: 'dia_diem', select: 'ten_dia_diem' },
       { path: 'nam_hoc', select: 'nam_hoc' },
-      { path: 'id_nhomtruong', select: 'ten_sinh_vien' },
     ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
