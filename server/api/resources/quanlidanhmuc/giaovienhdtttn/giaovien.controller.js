@@ -2,6 +2,9 @@ import * as responseAction from '../../../utils/responseAction';
 import queryHelper from '../../../helpers/queryHelper';
 import * as Service from './giaovien.service';
 import Model from './giaovien.model';
+import ModelUser from '../../user/user.model';
+import userService from '../../user/user.service';
+
 
 export async function findOne(req, res) {
   try {
@@ -60,6 +63,17 @@ export async function create(req, res) {
       return responseAction.error(res, { message: 'Mã giáo viên đã tồn tại, vui lòng kiểm tra và thử lại' }, 400);
     }
     const data = await Model.create(value);
+    const item =
+      {
+        full_name: data.ten_giao_vien,
+        username: data.ma_giao_vien,
+        password: userService.encryptPassword('1111'),
+        email: data.email,
+        gender: data.gioi_tinh,
+        phone: data.sdt,
+        role: 'GIANG_VIEN'
+      }
+    const docs = await ModelUser.create(item);
     let dataRtn = await data
       .populate({ path: 'ma_bo_mon', select: 'ten_bo_mon' }).execPopulate();
     return responseAction.success(res, dataRtn);
