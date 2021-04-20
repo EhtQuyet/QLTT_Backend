@@ -6,7 +6,6 @@ import { DT_TRANG_THAI } from '../../constant/constant';
 const schema = new Schema({
   ten_de_tai: { type: String, required: true, validate: /\S+/ },
   ma_de_tai: { type: String, required: true, validate: /\S+/, unique: true },
-  ngay_tao: { type: Date, required: true },
   trang_thai: {
     type: String,
     enum: Object.values(DT_TRANG_THAI),
