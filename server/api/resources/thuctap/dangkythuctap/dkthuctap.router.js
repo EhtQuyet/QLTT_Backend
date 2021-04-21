@@ -15,3 +15,6 @@ dkthuctapRouter
 dkthuctapRouter
   .route('/sv/:id')
   .get(passport.authenticate('jwt', { session: false }), controller.findOne)
+dkthuctapRouter
+  .route('/')
+  .get(passport.authenticate('jwt', { session: false }), controller.findOne)
