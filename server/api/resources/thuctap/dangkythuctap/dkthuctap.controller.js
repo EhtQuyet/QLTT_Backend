@@ -91,8 +91,9 @@ export async function update(req, res) {
   try {
     const { id } = req.params;
     const value = req.body;
+    console.log(value,'value');
     const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true })
-      .populate({ path: 'sinh_vien', select: 'full_name username' })
+      .populate({ path: 'sinh_vien', select: 'ma_sinh_vien ten_sinh_vien' })
       .populate({ path: 'dia_diem_thuc_tap', select: 'dia_chi ten_dia_diem' })
       .populate({ path: 'dot_thuc_tap', select: 'ten_dot' })
       .populate({ path: 'giao_vien_huong_dan', select: 'ma_giao_vien ten_giao_vien' });
