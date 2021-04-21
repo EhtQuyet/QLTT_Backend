@@ -1,15 +1,12 @@
 import mongoose, { Schema } from 'mongoose';
 import {
-  DANGKYTHUCTAP,
   DIADIEMTHUCTAP,
   DOTTHUCTAP,
   GIAOVIEN,
   NAMHOC,
   NHOMTHUCTAP,
-  SINHVIEN,
 } from '../../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import { TRANG_THAI } from '../../../constant/constant';
 
 const schema = new Schema({
   nam_hoc: {
