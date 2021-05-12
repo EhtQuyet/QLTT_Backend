@@ -41,3 +41,7 @@ export const THONG_BAO = {
   DA_GUI: 'DA_GUI',
   DA_NHAN: 'DA_NHAN',
 }
+export const KE_HOACH = {
+  DANG_XU_LY: 'DANG_XU_LY',
+  DA_XAC_NHAN: 'DA_XAC_NHAN',
+}

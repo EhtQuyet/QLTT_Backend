@@ -10,6 +10,10 @@ import {detaiRouter} from './api/resources/detaitttn/detai.router';
 import {diadiemthuctapRouter} from './api/resources/thuctap/diadiemthuctap/diadiemthuctap.router'
 import {namhocRouter} from './api/resources/quanlidanhmuc/namhoc/namhoc.router'
 import {dotthuctapRouter} from './api/resources/thuctap/dotthuctap/dotthuctap.router'
+import {linhvucRouter} from './api/resources/linhvuc/linhvuc.router'
+import {tukhoaRouter} from './api/resources/tukhoa/tukhoa.router'
+import {ngachgvRouter} from './api/resources/ngachgiangvien/ngachgv.router'
+import {kehoachttRouter} from './api/resources/kehoachtt/kehoachtt.router'
 import {dkthuctapRouter} from './api/resources/thuctap/dangkythuctap/dkthuctap.router'
 import {thongbaoRouter} from './api/resources/thongbao/thongbao.router'
 import {thongkeRouter} from './api/resources/ThongKe/thongke.router';
@@ -28,9 +32,13 @@ router.use('/lophoc', lophocRouter);
 router.use('/detai', detaiRouter);
 router.use('/diadiemthuctap', diadiemthuctapRouter);
 router.use('/namhoc', namhocRouter);
+router.use('/linhvuc', linhvucRouter);
+router.use('/tukhoa', tukhoaRouter);
 router.use('/dotthuctap', dotthuctapRouter);
 router.use('/dangkythuctap', dkthuctapRouter);
+router.use('/kehoachthuctap', kehoachttRouter);
 router.use('/thongbao', thongbaoRouter);
+router.use('/ngachgiangvien', ngachgvRouter);
 
 router.use('/nhomthuctap', nhomTTRouter);
 router.use('/nhomthuctapchitiet', chitietNhomTTRouter);

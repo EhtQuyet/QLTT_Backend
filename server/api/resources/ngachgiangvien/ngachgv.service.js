@@ -4,7 +4,7 @@ const Joi = require('joi');
 
 
 const objSchema = Joi.object({
-  nam_hoc: Joi.string().required().messages(ValidatorHelper.messageDefine('Kế hoạch thực tập')),
+  nam_hoc: Joi.string().required().messages(ValidatorHelper.messageDefine('Ngạch giảng viên')),
 });
 
 export function validate(data, method) {
