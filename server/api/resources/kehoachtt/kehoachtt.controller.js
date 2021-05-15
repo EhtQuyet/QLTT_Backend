@@ -68,6 +68,9 @@ export async function getAll(req, res) {
   try {
     const query = queryHelper.extractQueryParam(req, ['ma_sinh_vien']);
     const { criteria, options } = query;
+    options.populate = [
+      { path: 'ma_sinh_vien', select: 'ten_sinh_vien' },
+    ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
   } catch (err) {

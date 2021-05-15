@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { GIAOVIEN, BOMON } from '../../../constant/dbCollections';
+import { GIAOVIEN, BOMON, NGACHGIANGVIEN } from '../../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 const schema = new Schema({
@@ -14,6 +14,10 @@ const schema = new Schema({
   ma_bo_mon: {
     type: mongoose.Schema.Types.ObjectId,
     ref: BOMON
+  },
+  ma_ngach: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: NGACHGIANGVIEN
   },
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },

@@ -40,10 +40,9 @@ export async function update(req, res) {
       return responseAction.error(res, { message: 'Mã đề tài đã tồn tại, vui lòng kiểm tra và thử lại' }, 400);
     }
     const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true })
-      .populate({path: 'ma_bo_mon', select:'ten_bo_mon'})
+      .populate({path: 'ma_linh_vuc', select:'ten_linh_luc'})
       .populate({path: 'ma_nguoi_tao', select:'full_name'})
-      .populate({path: 'ma_nguoi_dang_ky', select:'full_name'})
-      .populate({path: 'ma_giao_vien', select:'ten_giao_vien'});
+      .populate({path: 'ma_giang_vien', select:'ten_giao_vien'});
     if (!data) {
       return responseAction.error(res, null, 404);
     }
@@ -64,10 +63,9 @@ export async function create(req, res) {
     }
     const data = await Model.create(value);
     let dataRtn = await data
-      .populate({path: 'ma_bo_mon', select:'ten_bo_mon'})
+      .populate({path: 'ma_linh_vuc', select:'ten_linh_luc'})
       .populate({path: 'ma_nguoi_tao', select:'full_name'})
-      .populate({path: 'ma_nguoi_dang_ky', select:'full_name'})
-      .populate({path: 'ma_giao_vien', select:'ten_giao_vien'}).execPopulate();
+      .populate({path: 'ma_giang_vien', select:'ten_giao_vien'}).execPopulate();
     return responseAction.success(res, dataRtn);
   } catch (err) {
     return responseAction.error(res, err, 500);
@@ -76,13 +74,12 @@ export async function create(req, res) {
 
 export async function getAll(req, res) {
   try {
-    const query = queryHelper.extractQueryParam(req, ['ten_giao_vien']);
+    const query = queryHelper.extractQueryParam(req, ['ten_giang_vien']);
     const { criteria, options } = query;
     options.populate = [
-      { path: 'ma_bo_mon', select: 'ten_bo_mon' },
+      { path: 'ma_linh_vuc', select:'ten_linh_vuc' },
       { path: 'ma_nguoi_tao', select: 'full_name' },
-      { path: 'ma_nguoi_dang_ky', select: 'full_name' },
-      { path: 'ma_giao_vien', select: 'ten_giao_vien' },
+      { path: 'ma_giang_vien', select: 'ten_giao_vien' },
     ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);

@@ -38,12 +38,17 @@ export async function update(req, res) {
 
     const { error, value } = Service.validate(req.body);
     if (error) return responseAction.error(res, error, 400);
-    const isUnique = await Model.findOne({ ma_giao_vien: value.ma_giao_vien, is_deleted: false, _id: { $ne: value._id } }, { _id: 1 });
+    const isUnique = await Model.findOne({
+      ma_giao_vien: value.ma_giao_vien,
+      is_deleted: false,
+      _id: { $ne: value._id },
+    }, { _id: 1 });
     if (isUnique) {
       return responseAction.error(res, { message: 'Mã giáo viên đã tồn tại, vui lòng kiểm tra và thử lại' }, 400);
     }
     const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true })
-      .populate({path: 'ma_bo_mon', select:'ten_bo_mon'});
+      .populate({ path: 'ma_bo_mon', select: 'ten_bo_mon' })
+      .populate({ path: 'ma_ngach', select: 'ten_ngach' });
     if (!data) {
       return responseAction.error(res, null, 404);
     }
@@ -71,11 +76,12 @@ export async function create(req, res) {
         email: data.email,
         gender: data.gioi_tinh,
         phone: data.sdt,
-        role: 'GIANG_VIEN'
-      }
+        role: 'GIANG_VIEN',
+      };
     const docs = await ModelUser.create(item);
     let dataRtn = await data
-      .populate({ path: 'ma_bo_mon', select: 'ten_bo_mon' }).execPopulate();
+      .populate({ path: 'ma_bo_mon', select: 'ten_bo_mon' })
+      .populate({ path: 'ma_ngach', select: 'ten_ngach' }).execPopulate();
     return responseAction.success(res, dataRtn);
   } catch (err) {
     return responseAction.error(res, err, 500);
@@ -88,6 +94,7 @@ export async function getAll(req, res) {
     const { criteria, options } = query;
     options.populate = [
       { path: 'ma_bo_mon', select: 'ten_bo_mon' },
+      { path: 'ma_ngach', select: 'ten_ngach' },
     ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
