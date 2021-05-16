@@ -5,24 +5,16 @@ import DiaDiemMoDel from '../thuctap/diadiemthuctap/diadiemthuctap.model';
 
 export async function getThongKeSinhVien(req, res) {
   try {
-
     const arrSVDuDK = await Model.find({ trang_thai: DKTT_TRANG_THAI.CHON_GIANG_VIEN });
     const arrSVKoDuDK = await Model.find({ trang_thai: DKTT_TRANG_THAI.KHONG_DU_DIEU_KIEN });
-    let countSVDuDK = 0;
-    let countSVKoDuDK = 0;
-    arrSVDuDK.forEach(data => {
-      countSVDuDK += 1;
-    });
-    arrSVKoDuDK.forEach(data => {
-      countSVKoDuDK += 1;
-    });
+
     let dataRes = []
     let objSVDuDK = {
-      SoSV: countSVDuDK,
+      SoSV: arrSVDuDK.length,
       TrangThai : ' Sinh viên đủ điều kiện'
     };
     let objSVKoDuDK= {
-      SoSV: countSVKoDuDK,
+      SoSV: arrSVKoDuDK.length,
       TrangThai : ' Sinh viên không đủ điều kiện'
     };
     dataRes.push(objSVDuDK)
@@ -36,8 +28,8 @@ export async function getThongKeSinhVien(req, res) {
 
 export async function getThongKeSVTheoDiaDiem(req, res) {
   try {
-    const dataDiaDiem = await DiaDiemMoDel.find({});
-    const dataSVDangKy = await Model.find({});
+    const dataDiaDiem = await DiaDiemMoDel.find();
+    const dataSVDangKy = await Model.find();
     let arrTK = [];
     dataDiaDiem.forEach(diadiem => {
       let i = 0;

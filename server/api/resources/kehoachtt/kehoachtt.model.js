@@ -4,7 +4,10 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 import { KE_HOACH } from '../../constant/constant';
 
 const schema = new Schema({
-  ma_sinh_vien: { type: mongoose.Schema.Types.ObjectId, red: SINHVIEN , required: true, validate: /\S+/, unique: true },
+  id_sinhvien: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: SINHVIEN
+  },
   ke_hoach: [{ type: Object}],
   ghi_chu: { type: String},
   trang_thai: {
