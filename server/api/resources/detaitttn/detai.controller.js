@@ -2,6 +2,7 @@ import * as responseAction from '../../utils/responseAction';
 import queryHelper from '../../helpers/queryHelper';
 import * as Service from './detai.service';
 import Model from './detai.model';
+import { DT_TRANG_THAI } from '../../constant/constant';
 
 export async function findOne(req, res) {
   try {
@@ -75,6 +76,7 @@ export async function create(req, res) {
 export async function getAll(req, res) {
   try {
     const query = queryHelper.extractQueryParam(req, ['ten_giang_vien']);
+
     const { criteria, options } = query;
     options.populate = [
       { path: 'ma_linh_vuc', select:'ten_linh_vuc' },
@@ -87,3 +89,22 @@ export async function getAll(req, res) {
     responseAction.error(res, err);
   }
 }
+
+export async function getListDeTai(req, res) {
+  try {
+    const query = queryHelper.extractQueryParam(req, ['ten_giang_vien']);
+
+    const { criteria, options } = query;
+    criteria.trang_thai = { $in: [DT_TRANG_THAI.CHUA_DUOC_DUYET , DT_TRANG_THAI.DA_DUOC_DUYET] }
+    options.populate = [
+      { path: 'ma_linh_vuc', select:'ten_linh_vuc' },
+      { path: 'ma_nguoi_tao', select: 'full_name' },
+      { path: 'ma_giang_vien', select: 'ten_giao_vien' },
+    ];
+    const data = await Model.paginate(criteria, options);
+    responseAction.success(res, data);
+  } catch (err) {
+    responseAction.error(res, err);
+  }
+}
+

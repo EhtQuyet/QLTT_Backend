@@ -27,11 +27,6 @@ const schema = new Schema({
     enum: Object.values(DT_TRANG_THAI),
     default: DT_TRANG_THAI.CHUA_DUOC_DUYET,
   },
-  trang_thai_dang_ky: {
-    type: String,
-    enum: Object.values(DT_TRANG_THAI),
-    default: DT_TRANG_THAI.CHUA_DANG_KY,
-  },
 
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },
