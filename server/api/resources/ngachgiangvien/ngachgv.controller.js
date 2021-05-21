@@ -69,6 +69,7 @@ export async function getAll(req, res) {
   try {
     const query = queryHelper.extractQueryParam(req, ['ten_ngach']);
     const { criteria, options } = query;
+    options.sort = { created_at: -1 }
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
   } catch (err) {

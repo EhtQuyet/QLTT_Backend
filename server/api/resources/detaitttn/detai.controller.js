@@ -78,6 +78,7 @@ export async function getAll(req, res) {
     const query = queryHelper.extractQueryParam(req, ['ten_giang_vien']);
 
     const { criteria, options } = query;
+    options.sort = { created_at: -1 }
     options.populate = [
       { path: 'ma_linh_vuc', select:'ten_linh_vuc' },
       { path: 'ma_nguoi_tao', select: 'full_name' },

@@ -61,6 +61,7 @@ export async function getAll(req, res) {
   try {
     const query = queryHelper.extractQueryParam(req, ['ten_linh_vuc']);
     const { criteria, options } = query;
+    options.sort = { created_at: -1 }
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
   } catch (err) {

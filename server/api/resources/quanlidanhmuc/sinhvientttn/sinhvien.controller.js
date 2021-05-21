@@ -132,6 +132,7 @@ export async function getAll(req, res) {
   try {
     const query = queryHelper.extractQueryParam(req, ['ten_lop_hoc']);
     const { criteria, options } = query;
+    options.sort = { created_at: -1 }
     options.populate = [
       { path: 'ma_lop_hoc', select: 'ten_lop_hoc' },
     ];

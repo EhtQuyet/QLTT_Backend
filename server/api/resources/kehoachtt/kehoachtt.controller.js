@@ -90,6 +90,7 @@ export async function getAll(req, res) {
   try {
     const query = queryHelper.extractQueryParam(req, ['id_sinhvien']);
     const { criteria, options } = query;
+    options.sort = { created_at: -1 }
     options.populate = [
       { path: 'id_sinhvien', select: 'ten_sinh_vien' },
     ];

@@ -62,6 +62,7 @@ export async function getAll(req, res) {
   try {
     const query = queryHelper.extractQueryParam(req, ['ten_dia_diem']);
     const { criteria, options } = query;
+    options.sort = { created_at: -1 }
     // options.populate = [
     //   { path: 'id_don_vi', select: 'ten_don_vi' },
     // ];
