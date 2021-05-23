@@ -7,7 +7,9 @@ dotthuctapRouter
   .route('/')
   .get(passport.authenticate('jwt', { session: false }), controller.getAll)
   .post(passport.authenticate('jwt', { session: false }), controller.create)
-
+dotthuctapRouter
+  .route('/dangky')
+  .get(passport.authenticate('jwt', { session: false }), controller.getAllDK)
 dotthuctapRouter
   .route('/:id')
   .get(passport.authenticate('jwt', { session: false }), controller.findOne)

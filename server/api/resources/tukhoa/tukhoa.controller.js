@@ -32,7 +32,6 @@ export async function remove(req, res) {
 export async function update(req, res) {
   try {
     const { id } = req.params;
-
     const { error, value } = Service.validate(req.body);
     if (error) return responseAction.error(res, error, 400);
     const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true });

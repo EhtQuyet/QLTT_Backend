@@ -2,6 +2,7 @@ import * as responseAction from '../../../utils/responseAction';
 import queryHelper from '../../../helpers/queryHelper';
 import * as Service from './dotthuctap.service';
 import Model from './dotthuctap.model';
+import { DTT_TRANG_THAI } from '../../../constant/constant';
 
 export async function findOne(req, res) {
   try {
@@ -61,7 +62,6 @@ export async function create(req, res) {
 }
 
 export async function getAll(req, res) {
-
   try {
     const query = queryHelper.extractQueryParam(req);
     const { criteria, options } = query;
@@ -74,5 +74,23 @@ export async function getAll(req, res) {
   } catch (err) {
     responseAction.error(res, err);
   }
+}
+
+export async function getAllDK(req, res) {
+
+  try {
+    const query = queryHelper.extractQueryParam(req);
+    const { criteria, options } = query;
+    criteria.trang_thai = { $in: [DTT_TRANG_THAI.DA_KHOA , DTT_TRANG_THAI.DANG_MO] }
+    options.sort = { created_at: -1 }
+    options.populate = [
+      { path: 'namhoc', select: 'nam_hoc' }
+    ];
+    const data = await Model.paginate(criteria, options);
+    responseAction.success(res, data);
+  } catch (err) {
+    responseAction.error(res, err);
+  }
 
 }
+
