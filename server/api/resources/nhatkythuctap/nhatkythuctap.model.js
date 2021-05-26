@@ -4,11 +4,7 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 import { NHAT_KY } from '../../constant/constant';
 
 const schema = new Schema({
-  ma_sinh_vien: {
-  type: mongoose.Schema.Types.ObjectId,
-    ref: SINHVIEN,
-    required: true,
-},
+  ma_sinh_vien: { type: mongoose.Schema.Types.ObjectId, required: true, ref: SINHVIEN},
   ngay: { type: Date, validate: /\S+/ },
   dia_diem: { type: String },
   cong_viec: { type: String },

@@ -78,13 +78,14 @@ export async function create(req, res) {
 
 export async function getAll(req, res) {
   try {
-    const query = queryHelper.extractQueryParam(req, ['ma_sinh_vien']);
+    const query = queryHelper.extractQueryParam(req);
     const { criteria, options } = query;
     options.sort = { created_at: -1 }
     options.populate = [
       { path: 'ma_sinh_vien', select: 'ten_sinh_vien ma_sinh_vien' },
     ];
     const data = await Model.paginate(criteria, options);
+    console.log('data',data);
     responseAction.success(res, data);
   } catch (err) {
     responseAction.error(res, err);

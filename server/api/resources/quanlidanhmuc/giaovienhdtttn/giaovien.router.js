@@ -3,7 +3,7 @@ import passport from 'passport';
 import * as controller from './giaovien.controller';
 
 export const giaovienRouter = express.Router();
-giaovienRouter  .route('/')
+giaovienRouter.route('/')
   .get(passport.authenticate('jwt', { session: false }), controller.getAll)
   .post(passport.authenticate('jwt', { session: false }), controller.create)
 
