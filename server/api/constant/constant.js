@@ -26,6 +26,12 @@ export const DTT_TRANG_THAI = {
   KET_THUC: 'KET_THUC',
 };
 
+export const NHIEM_VU = {
+  DA_GIAO: 'DA_GIAO',
+  HOAN_THANH: 'HOAN_THANH',
+  XAC_NHAN: 'XAC_NHAN',
+}
+
 export const DKTT_TRANG_THAI = {
   DA_DANG_KY: 'DA_DANG_KY',
   DU_DIEU_KIEN: 'DU_DIEU_KIEN',

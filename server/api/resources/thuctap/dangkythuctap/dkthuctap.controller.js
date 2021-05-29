@@ -29,7 +29,6 @@ export async function getAll(req, res) {
 export async function create(req, res) {
   try {
     const value = req.body;
-    console.log('value',value);
     const isUnique = await Model.findOne({ sinh_vien: value.sinh_vien, dot_thuc_tap: value.dot_thuc_tap, is_deleted: false, _id: { $ne: value._id } }, { _id: 1 });
     if (isUnique) {
       return responseAction.error(res, { message: 'Sinh viên đã đăng ký thực tập, vui lòng kiểm tra lại' }, 400);

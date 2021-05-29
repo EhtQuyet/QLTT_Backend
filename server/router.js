@@ -16,6 +16,7 @@ import {ngachgvRouter} from './api/resources/ngachgiangvien/ngachgv.router'
 import {kehoachttRouter} from './api/resources/kehoachtt/kehoachtt.router'
 import {nhatkyRouter} from './api/resources/nhatkythuctap/nhatkythuctap.router'
 import {dkthuctapRouter} from './api/resources/thuctap/dangkythuctap/dkthuctap.router'
+import {nhiemVuRouter} from './api/resources/thuctap/NhiemVuSinhVien/nhiemVuSinhVien.router'
 import {thongbaoRouter} from './api/resources/thongbao/thongbao.router'
 import {thongkeRouter} from './api/resources/ThongKe/thongke.router';
 import { router as nhomTTRouter } from './api/resources/thuctap/nhomthuctap/router';
@@ -41,6 +42,7 @@ router.use('/kehoachthuctap', kehoachttRouter);
 router.use('/thongbao', thongbaoRouter);
 router.use('/ngachgiangvien', ngachgvRouter);
 router.use('/nhatkythuctap', nhatkyRouter);
+router.use('/nhiemvusinhvien', nhiemVuRouter);
 
 router.use('/nhomthuctap', nhomTTRouter);
 router.use('/nhomthuctapchitiet', chitietNhomTTRouter);
