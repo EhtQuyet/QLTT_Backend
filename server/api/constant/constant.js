@@ -21,14 +21,12 @@ export const NHAT_KY = {
 };
 
 export const DTT_TRANG_THAI = {
-  // trạng thái đơt thực tập
   DANG_MO: 'DANG_MO',
   DA_KHOA: 'DA_KHOA',
   KET_THUC: 'KET_THUC',
 };
 
 export const DKTT_TRANG_THAI = {
-  // trạng thái đăng ký thực tập
   DA_DANG_KY: 'DA_DANG_KY',
   DU_DIEU_KIEN: 'DU_DIEU_KIEN',
   KHONG_DU_DIEU_KIEN: 'KHONG_DU_DIEU_KIEN',

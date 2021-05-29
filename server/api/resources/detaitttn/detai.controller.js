@@ -43,7 +43,8 @@ export async function update(req, res) {
     const data = await Model.findOneAndUpdate({ _id: id }, value, { new: true })
       .populate({path: 'ma_linh_vuc', select:'ten_linh_luc'})
       .populate({path: 'ma_nguoi_tao', select:'full_name'})
-      .populate({path: 'ma_giang_vien', select:'ten_giao_vien'});
+      .populate({path: 'ma_giang_vien', select:'ten_giao_vien'})
+      .populate({path: 'tu_khoa', select:'tu_khoa'});
     if (!data) {
       return responseAction.error(res, null, 404);
     }
@@ -66,6 +67,7 @@ export async function create(req, res) {
     let dataRtn = await data
       .populate({path: 'ma_linh_vuc', select:'ten_linh_luc'})
       .populate({path: 'ma_nguoi_tao', select:'full_name'})
+      .populate({path: 'tu_khoa', select:'tu_khoa'})
       .populate({path: 'ma_giang_vien', select:'ten_giao_vien'}).execPopulate();
     return responseAction.success(res, dataRtn);
   } catch (err) {
@@ -83,6 +85,7 @@ export async function getAll(req, res) {
       { path: 'ma_linh_vuc', select:'ten_linh_vuc' },
       { path: 'ma_nguoi_tao', select: 'full_name' },
       { path: 'ma_giang_vien', select: 'ten_giao_vien' },
+      { path: 'tu_khoa', select: 'tu_khoa' },
     ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
@@ -101,6 +104,7 @@ export async function getListDeTai(req, res) {
       { path: 'ma_linh_vuc', select:'ten_linh_vuc' },
       { path: 'ma_nguoi_tao', select: 'full_name' },
       { path: 'ma_giang_vien', select: 'ten_giao_vien' },
+      { path: 'tu_khoa', select: 'tu_khoa' },
     ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);

@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { GIAOVIEN, DETAI, USER, BOMON, LINHVUC, NAMHOC} from '../../constant/dbCollections';
+import { GIAOVIEN, DETAI, USER, BOMON, LINHVUC, NAMHOC, TUKHOA, SINHVIEN } from '../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
 import { DT_TRANG_THAI } from '../../constant/constant';
 
@@ -18,6 +18,12 @@ const schema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: LINHVUC,
   },
+  noi_dung: { type: String },
+  ket_qua: { type: String },
+  sinh_vien_thuc_hien: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: SINHVIEN,
+  },
   nam_hoc: {
     type: mongoose.Schema.Types.ObjectId,
     ref: NAMHOC,
@@ -27,6 +33,10 @@ const schema = new Schema({
     enum: Object.values(DT_TRANG_THAI),
     default: DT_TRANG_THAI.CHUA_DUOC_DUYET,
   },
+  tu_khoa: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: TUKHOA,
+  }],
 
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },

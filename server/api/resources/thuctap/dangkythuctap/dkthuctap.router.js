@@ -7,6 +7,8 @@ dkthuctapRouter.route('/')
   .get(passport.authenticate('jwt', { session: false }), controller.getAll)
   .post(passport.authenticate('jwt', { session: false }), controller.create)
 
+dkthuctapRouter.route('/xacnhanhuongdan')
+  .post(passport.authenticate('jwt', { session: false }), controller.xacNhanHuongDan)
 dkthuctapRouter
   .route('/:id')
   .get(passport.authenticate('jwt', { session: false }), controller.findById)
