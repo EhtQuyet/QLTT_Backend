@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import { DIADIEMTHUCTAP, GIAOVIEN, SINHVIEN, DOTTHUCTAP, NHIEMVUSINHVIEN } from '../../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import { NHIEM_VU } from '../../../constant/constant';
+import { NHIEM_VU, UU_TIEN } from '../../../constant/constant';
 
 const schema = new Schema({
   sinh_vien: { type: mongoose.Schema.Types.ObjectId, required: true, ref: SINHVIEN},
@@ -14,6 +14,11 @@ const schema = new Schema({
     type: String,
     enum: Object.values(NHIEM_VU),
     default: NHIEM_VU.DA_GIAO,
+  },
+  uu_tien: {
+    type: String,
+    enum: Object.values(UU_TIEN),
+    default: UU_TIEN.LOW,
   },
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },

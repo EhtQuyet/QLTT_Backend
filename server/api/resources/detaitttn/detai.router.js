@@ -5,9 +5,11 @@ import * as controller from './detai.controller';
 export const detaiRouter = express.Router();
 detaiRouter.route('/')
   .get(passport.authenticate('jwt', { session: false }), controller.getAll)
-  .post(passport.authenticate('jwt', { session: false }), controller.create)
+  .post(passport.authenticate('jwt', { session: false }), controller.create);
+detaiRouter.route('/danhgiatrunglap')
+  .post(passport.authenticate('jwt', { session: false }), controller.duplication);
 detaiRouter.route('/list')
-  .get(passport.authenticate('jwt', { session: false }), controller.getListDeTai)
+  .get(passport.authenticate('jwt', { session: false }), controller.getListDeTai);
 detaiRouter
   .route('/:id')
   .get(passport.authenticate('jwt', { session: false }), controller.findOne)

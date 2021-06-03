@@ -86,6 +86,7 @@ export async function getAll(req, res) {
       { path: 'ma_nguoi_tao', select: 'full_name' },
       { path: 'ma_giang_vien', select: 'ten_giao_vien' },
       { path: 'tu_khoa', select: 'tu_khoa' },
+      { path: 'nam_hoc', select: 'nam_hoc' },
     ];
     const data = await Model.paginate(criteria, options);
     responseAction.success(res, data);
@@ -113,3 +114,19 @@ export async function getListDeTai(req, res) {
   }
 }
 
+export async function duplication(req, res) {
+  try {
+    const { id } = req.params;
+
+    const { error, value } = Service.validate(req.body);
+    const deTai = await Model.findOne({ _id: id , is_deleted: false}, { new: true })
+
+
+    if (!deTai) {
+      return responseAction.error(res, null, 404);
+    }
+    return responseAction.success(res, deTai);
+  } catch (err) {
+    responseAction.error(res, err);
+  }
+}

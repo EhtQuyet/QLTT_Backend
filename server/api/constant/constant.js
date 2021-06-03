@@ -17,7 +17,6 @@ export const NHAT_KY = {
   DA_KHOA: 'DA_KHOA',
   KIEM_DUYET: 'KIEM_DUYET',
   XAC_NHAN: 'XAC_NHAN'
-
 };
 
 export const DTT_TRANG_THAI = {
@@ -31,6 +30,12 @@ export const NHIEM_VU = {
   HOAN_THANH: 'HOAN_THANH',
   XAC_NHAN: 'XAC_NHAN',
 }
+export const UU_TIEN = {
+  HIGH: 'HIGH',
+  MEDIUM: 'MEDIUM',
+  LOW: 'LOW',
+}
+
 
 export const DKTT_TRANG_THAI = {
   DA_DANG_KY: 'DA_DANG_KY',
