@@ -1,10 +1,11 @@
-import * as ValidatorHelper from '../../helpers/validatorHelper';
+import * as ValidatorHelper from '../../../helpers/validatorHelper';
+import FILE from './file.model';
 
 const Joi = require('joi');
 
-
 const objSchema = Joi.object({
-  nam_hoc: Joi.string().required().messages(ValidatorHelper.messageDefine('Kế hoạch thực tập')),
+  file_name: Joi.string().required().messages(ValidatorHelper.messageDefine('Tên file')),
+  detai_id: Joi.string().required().messages(ValidatorHelper.messageDefine('Tên đề tài')),
 });
 
 export function validate(data, method) {
@@ -14,4 +15,7 @@ export function validate(data, method) {
     return { error };
   }
   return { value };
+}
+export function getAll(query) {
+  return FILE.find(query).lean();
 }

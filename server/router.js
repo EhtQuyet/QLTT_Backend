@@ -13,14 +13,17 @@ import {dotthuctapRouter} from './api/resources/thuctap/dotthuctap/dotthuctap.ro
 import {linhvucRouter} from './api/resources/linhvuc/linhvuc.router'
 import {tukhoaRouter} from './api/resources/tukhoa/tukhoa.router'
 import {ngachgvRouter} from './api/resources/ngachgiangvien/ngachgv.router'
-import {kehoachttRouter} from './api/resources/kehoachtt/kehoachtt.router'
+// import {kehoachttRouter} from './api/resources/kehoachtt/kehoachtt.router'
 import {nhatkyRouter} from './api/resources/nhatkythuctap/nhatkythuctap.router'
 import {dkthuctapRouter} from './api/resources/thuctap/dangkythuctap/dkthuctap.router'
 import {nhiemVuRouter} from './api/resources/thuctap/NhiemVuSinhVien/nhiemVuSinhVien.router'
 import {thongbaoRouter} from './api/resources/thongbao/thongbao.router'
 import {thongkeRouter} from './api/resources/ThongKe/thongke.router';
+import {fileRouter} from './api/resources/detaitttn/file/file.router';
 import { router as nhomTTRouter } from './api/resources/thuctap/nhomthuctap/router';
 import { router as chitietNhomTTRouter } from './api/resources/thuctap/nhomthuctap/chitiet/router';
+import { router as kehoachRouter } from './api/resources/thuctap/kehoachthuctap/router';
+import { router as chitietKeHoachRouter } from './api/resources/thuctap/kehoachthuctap/chitiet/router';
 
 
 const router = express.Router();
@@ -38,7 +41,7 @@ router.use('/linhvuc', linhvucRouter);
 router.use('/tukhoa', tukhoaRouter);
 router.use('/dotthuctap', dotthuctapRouter);
 router.use('/dangkythuctap', dkthuctapRouter);
-router.use('/kehoachthuctap', kehoachttRouter);
+// router.use('/kehoachthuctap', kehoachttRouter);
 router.use('/thongbao', thongbaoRouter);
 router.use('/ngachgiangvien', ngachgvRouter);
 router.use('/nhatkythuctap', nhatkyRouter);
@@ -46,7 +49,11 @@ router.use('/nhiemvusinhvien', nhiemVuRouter);
 
 router.use('/nhomthuctap', nhomTTRouter);
 router.use('/nhomthuctapchitiet', chitietNhomTTRouter);
+router.use('/kehoachthuctap', kehoachRouter);
+router.use('/kehoachchitiet', chitietKeHoachRouter);
+
 router.use('/thongkesinhvien', thongkeRouter);
+router.use('/file', fileRouter);
 
 
 

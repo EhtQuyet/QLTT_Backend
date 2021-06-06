@@ -8,6 +8,7 @@ import request from 'request';
 
 const osTempDir = require('os').tmpdir();
 const tempDir = osTempDir + '/uploads';
+const filesDir = path.resolve('./storage');
 
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir);
@@ -19,6 +20,15 @@ let conf = config.cos.credentials;
 let s3;
 let bucketName = config.cos.bucketName;
 
+
+async function copyFile(srcPath, desPath) {
+  return new Promise((resolve, reject) => {
+    fs.copyFile(srcPath, desPath, (err) => {
+      if (err) reject(err);
+      resolve(desPath);
+    });
+  });
+}
 const checkTempFolder = (req, res, next) => {
   if (!fs.existsSync(tempDir)) {
     fs.mkdirSync(tempDir);
@@ -77,6 +87,11 @@ const deleteItemObject = (key) => {
     Key: key,
   }).promise();
 };
+
+export function deleteFile(filePath) {
+  fs.unlink(filePath, () => {
+  });
+}
 
 const create = (filePath) => {
   return new Promise((resolve, reject) => {
@@ -198,6 +213,30 @@ const createByName = (filePath, fileName, pathOriginal) => {
     });
   });
 };
+async function copyFileToStorage(srcPath, fileName) {
+  const desPath = `${filesDir}/${fileName}`;
+  return copyFile(srcPath, desPath);
+}
+
+const createByNameFile = (filePath, fileName) => {
+  return new Promise((resolve, reject) => {
+    let file = fs.createReadStream(filePath);
+    file.on('error', (err) => {
+      console.log(err);
+      deleteFile(filePath);
+      reject(FILE_MISSING);
+    });
+    copyFileToStorage(filePath, fileName).then((newFilePath) => {
+      deleteFile(filePath);
+      resolve(newFilePath);
+    }).catch(err => {
+      console.log('Bucket is not exists or you dont have permission to access it.');
+      console.log(err);
+      deleteFile(filePath);
+      reject(err);
+    });
+  });
+};
 
 const update = (filePath, fileName) => {
   return new Promise((resolve, reject) => {
@@ -314,6 +353,43 @@ function getMaSo(){
 
 }
 
+function createUniqueFileName(filePath) {
+  let fileName;
+  if (filePath) {
+    let fileExtension = getFileExtension(filePath);
+    console.log(filePath);
+    let name = path.parse(filePath).name;
+    let timeStamp = (new Date()).toISOString();
+    timeStamp = timeStamp.replace(/:/g, '-');
+    fileName = fileExtension === '' ? `${name}_${timeStamp}` : `${name}_${timeStamp}.${fileExtension}`;
+  }
+  return fileName;
+}
+
+export function getName(filePath) {
+  return path.parse(filePath).base;
+}
+
+const downloadFile = (async (url, path) => {
+  const res = await fetch(url);
+  const fileStream = fs.createWriteStream(path);
+  await new Promise((resolve, reject) => {
+    res.body.pipe(fileStream);
+    res.body.on('error', (err) => {
+      reject(err);
+    });
+    fileStream.on('finish', function() {
+      resolve();
+    });
+  });
+});
+export const getFilePath = (fileName) => {
+  return path.join(filesDir, fileName);
+};
+export const getFilePipe = (fileName) => {
+  const filePath = getFilePath(fileName);
+  return fs.createReadStream(filePath);
+};
 export {
   create,
   createByName,
@@ -327,4 +403,7 @@ export {
   checkTempFolder,
   downLoadAndSaveFile,
   formatFileName,
+  createUniqueFileName,
+  downloadFile,
+  createByNameFile
 };

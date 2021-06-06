@@ -55,6 +55,7 @@
     "connect-multiparty": "^2.2.0",
     "connected-react-router": "6.4.0",
     "cross-env": "5.2.0",
+    "exif-reader": "^1.0.3",
     "express": "^4.17.1",
     "font-awesome": "^4.7.0",
     "fontfaceobserver": "2.1.0",
@@ -81,9 +82,11 @@
     "query-to-mongo": "^0.10.1",
     "request": "^2.88.2",
     "reselect": "4.0.0",
+    "sharp": "^0.28.3",
     "tailwindcss": "^2.0.1",
     "use-async-memo": "^1.2.2",
-    "use-query-params": "^1.1.8"
+    "use-query-params": "^1.1.8",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@babel/cli": "7.4.3",

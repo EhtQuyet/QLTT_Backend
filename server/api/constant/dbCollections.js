@@ -14,12 +14,14 @@ export const LINHVUC = 'LinhVuc'
 export const TUKHOA = 'TuKhoa'
 export const NGACHGIANGVIEN = 'NgachGiangVien'
 export const KEHOACHTT = 'KeHoachTT'
+export const KEHOACH_CHITIET = 'KeHoachChiTiet'
 export const DANHSACHTHUCTAP = 'DanhSachThucTap'
 export const DOTTHUCTAP = 'DotThucTap'
 export const NHIEMVUSINHVIEN = 'NhiemVuSinhVien'
 export const DANGKYTHUCTAP = 'DangKyThucTap'
 export const NHOMTHUCTAP = 'NhomThucTap'
 export const CHITIET_NHOMTHUCTAP = 'ChiTietNhomThucTap'
+export const FILE = 'File'
 
 
 
