@@ -37,7 +37,7 @@ const schema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: TUKHOA,
   }],
-
+  file: {type: String},
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },
 }, {
