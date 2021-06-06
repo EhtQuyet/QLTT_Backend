@@ -22,8 +22,8 @@ import {thongkeRouter} from './api/resources/ThongKe/thongke.router';
 import {fileRouter} from './api/resources/detaitttn/file/file.router';
 import { router as nhomTTRouter } from './api/resources/thuctap/nhomthuctap/router';
 import { router as chitietNhomTTRouter } from './api/resources/thuctap/nhomthuctap/chitiet/router';
-import { router as kehoachRouter } from './api/resources/thuctap/kehoachthuctap/router';
-import { router as chitietKeHoachRouter } from './api/resources/thuctap/kehoachthuctap/chitiet/router';
+// import { router as kehoachRouter } from './api/resources/thuctap/kehoachthuctap/router';
+// import { router as chitietKeHoachRouter } from './api/resources/thuctap/kehoachthuctap/chitiet/router';
 
 
 const router = express.Router();
@@ -49,8 +49,8 @@ router.use('/nhiemvusinhvien', nhiemVuRouter);
 
 router.use('/nhomthuctap', nhomTTRouter);
 router.use('/nhomthuctapchitiet', chitietNhomTTRouter);
-router.use('/kehoachthuctap', kehoachRouter);
-router.use('/kehoachchitiet', chitietKeHoachRouter);
+// router.use('/kehoachthuctap', kehoachRouter);
+// router.use('/kehoachchitiet', chitietKeHoachRouter);
 
 router.use('/thongkesinhvien', thongkeRouter);
 router.use('/file', fileRouter);
