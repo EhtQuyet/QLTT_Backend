@@ -1,20 +1,22 @@
 import mongoose, { Schema } from 'mongoose';
-import { SINHVIEN, KEHOACHTT } from '../../constant/dbCollections';
+import {
+  KEHOACHTT, SINHVIEN
+} from '../../../constant/dbCollections';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import { KE_HOACH } from '../../constant/constant';
+import { KE_HOACH } from '../../../constant/constant';
 
 const schema = new Schema({
   id_sinhvien: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: SINHVIEN
+    required: true,
+    ref: SINHVIEN,
   },
-  ke_hoach: [{ type: Object}],
+ trang_thai:{
+   type: String,
+   enum: Object.values(KE_HOACH),
+   default: KE_HOACH.DANG_XU_LY,
+ },
   ghi_chu: { type: String},
-  trang_thai: {
-    type: String,
-    enum: Object.values(KE_HOACH),
-    default: KE_HOACH.DANG_XU_LY,
-  },
   isActive: { type: Boolean, default: true },
   is_deleted: { type: Boolean, default: false, select: false },
 }, {
@@ -24,7 +26,6 @@ const schema = new Schema({
   },
   versionKey: false,
 });
-
 
 schema.plugin(mongoosePaginate);
 export { schema as DocumentSchema };
